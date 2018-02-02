@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.unittesters</groupId>
 	<artifactId>munit-db-testcontainers-connector</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<packaging>mule-module</packaging>
 	<name>Mule Munit DB TestContainers Anypoint Connector</name>
 
@@ -34,7 +34,7 @@
 		<connection>scm:git:git://github.com:manikmagar/munit-db-testcontainers-connector.git</connection>
 		<developerConnection>scm:git:git@github.com:manikmagar/munit-db-testcontainers-connector.git</developerConnection>
 		<url>http://github.com/manikmagar/munit-db-testcontainers-connector</url>
-	  <tag>munit-db-testcontainers-connector-0.0.1</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<dependencies>
