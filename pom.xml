@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.unittesters</groupId>
+	<artifactId>munit-db-testcontainers-connector</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>mule-module</packaging>
+	<name>Mule Munit DB TestContainers Anypoint Connector</name>
+
+	<parent>
+		<groupId>org.mule.tools.devkit</groupId>
+		<artifactId>mule-devkit-parent</artifactId>
+		<version>3.9.0</version>
+	</parent>
+
+	<properties>
+		<category>Community</category>
+		<licensePath>LICENSE.md</licensePath>
+		<devkit.studio.package.skip>false</devkit.studio.package.skip>
+
+		<tc.jdbc.version>1.6.0</tc.jdbc.version>
+
+	</properties>
+	<repositories>
+		<repository>
+			<id>mulesoft-releases</id>
+			<name>MuleSoft Releases Repository</name>
+			<url>http://repository.mulesoft.org/releases/</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+	<scm>
+		<connection>scm:git:git://github.com:manikmagar/munit-db-testcontainers-connector.git</connection>
+		<developerConnection>scm:git:git@github.com:manikmagar/munit-db-testcontainers-connector.git</developerConnection>
+		<url>http://github.com/manikmagar/munit-db-testcontainers-connector</url>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>jdbc</artifactId>
+			<version>${tc.jdbc.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>mysql</artifactId>
+			<version>${tc.jdbc.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.6</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+</project>
