@@ -1,9 +1,12 @@
 package com.unittesters.mule.munit.tools.testcontainers.db;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.mule.api.annotations.Category;
 import org.mule.api.annotations.Config;
 import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Processor;
+import org.slf4j.Logger;
 
 import com.unittesters.mule.munit.tools.testcontainers.db.config.ConnectorConfig;
 
@@ -19,7 +22,7 @@ import com.unittesters.mule.munit.tools.testcontainers.db.config.ConnectorConfig
 @Connector(name="db-testcontainers", friendlyName="DB TestContainers")
 @Category(name = "org.mule.tooling.category.munit.utils", description = "Munit tools")
 public class DBTestContainerConnector {
-
+	
 	@Config
     ConnectorConfig config;
     
@@ -44,5 +47,10 @@ public class DBTestContainerConnector {
     @Processor(friendlyName="Stop Container", name="stop-db-container")
     public void stopDbContainer(){
     	containerHolder.stopContainer();
+    }
+    
+    @Processor(friendlyName="Run Init Script", name="run-init-script")
+    public void runInitScript(){
+    	containerHolder.rerunInitScript(config.getTcInitScript());
     }
 }

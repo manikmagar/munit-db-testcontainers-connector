@@ -7,6 +7,7 @@ import org.mule.api.annotations.display.FriendlyName;
 import org.mule.api.annotations.display.Password;
 import org.mule.api.annotations.display.Placement;
 import org.mule.api.annotations.display.Summary;
+import org.mule.api.annotations.param.Optional;
 
 /**
  * Connector Configuration
@@ -31,12 +32,21 @@ public class ConnectorConfig {
 	@Password
 	@Placement(group="Connectivity")
 	private String password;
+	
+	@Configurable
+	@Optional
+	@Placement(group="Advanced")
+	@FriendlyName("TC_INITSCRIPT")
+	private String tcInitScript;
 
 	public String getUrl() {
 		return url;
 	}
 
 	public void setUrl(String url) {
+		if(url.contains("TC_INITSCRIPT")) {
+			throw new RuntimeException("TC_INITSCRIPT parameter is not allowed in JDBC Connection String. Please set it as attribute on configuration.");
+		}
 		this.url = url;
 	}
 
@@ -56,4 +66,13 @@ public class ConnectorConfig {
 		this.password = password;
 	}
 
+	public String getTcInitScript() {
+		return tcInitScript;
+	}
+
+	public void setTcInitScript(String tcInitScript) {
+		this.tcInitScript = tcInitScript;
+	}
+	
+	
 }
