@@ -13,5 +13,4 @@ cache:
   directories:
     - '$HOME/.m2'
 
-script:
-  -	mvn clean install -B -Dtest=FunctionalTestSuite
+script: mvn clean install -B -Dtest=FunctionalTestSuite
