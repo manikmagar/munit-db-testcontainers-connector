@@ -82,7 +82,7 @@ public class MuleTestContainerHolder {
 	
 	private void runInitScriptIfRequired(String initScriptPath) throws SQLException{
 		
-		if (Objects.isNull(initScriptPath)) return;
+		if (initScriptPath == null) return;
 		
 		try {
 			
