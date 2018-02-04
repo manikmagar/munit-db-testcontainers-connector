@@ -1,7 +1,7 @@
 language: java
 jdk:
   - openjdk7
-  
+
 services:
   - docker
 
@@ -12,4 +12,8 @@ services:
 cache:
   directories:
     - '$HOME/.m2'
- 
+
+jobs:
+  include:
+    script:
+	     -	mvn clean install -B -Dtest=FunctionalTestSuite
