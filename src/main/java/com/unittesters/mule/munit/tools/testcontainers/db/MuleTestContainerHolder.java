@@ -11,8 +11,6 @@ import java.util.Objects;
 import javax.script.ScriptException;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,6 +38,13 @@ public class MuleTestContainerHolder {
 		startContainer(url, username, password, null);
 	}
 	
+	/**
+	 * Start the container and run init script if needed.
+	 * @param url
+	 * @param username
+	 * @param password
+	 * @param tcInitScriptPath
+	 */
 	public void startContainer(String url, String username, String password, String tcInitScriptPath){
 		try {
 			connection = DriverManager.getConnection(url,username,password);
@@ -54,10 +59,13 @@ public class MuleTestContainerHolder {
 	 * 
 	 * @param tcInitScriptPath
 	 */
-	public void rerunInitScript(String tcInitScriptPath){
+	private void runInitScriptIfRequired(String tcInitScriptPath){
 		Objects.requireNonNull(connection, "Database connection is not initialized. Container must be started first.");
+		
+		if (tcInitScriptPath == null) return;
+		
 		try {
-			runInitScriptIfRequired(tcInitScriptPath);
+			runSqlScript(tcInitScriptPath);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -80,27 +88,32 @@ public class MuleTestContainerHolder {
 		}
 	}
 	
-	private void runInitScriptIfRequired(String initScriptPath) throws SQLException{
-		
-		if (initScriptPath == null) return;
+	/**
+	 * Run the SQL script at specified path
+	 * @param sqlScriptPath
+	 * @throws SQLException
+	 */
+	public void runSqlScript(String sqlScriptPath) throws SQLException{
+		Objects.requireNonNull(connection, "Database connection is not initialized. Container must be started first.");
+		Objects.requireNonNull(sqlScriptPath, "SQL Scrit path cannot be null");
 		
 		try {
 			
-            URL resource = Thread.currentThread().getContextClassLoader().getResource(initScriptPath);
+            URL resource = Thread.currentThread().getContextClassLoader().getResource(sqlScriptPath);
 
             if (resource == null) {
-            	LOGGER.warn(String.format("Could not load classpath init script: {}", initScriptPath));
-                throw new SQLException("Could not load classpath init script: " + initScriptPath + ". Resource not found.");
+            	LOGGER.warn(String.format("Could not load classpath init script: {}", sqlScriptPath));
+                throw new SQLException("Could not load classpath init script: " + sqlScriptPath + ". Resource not found.");
             }
 
             String sql = IOUtils.toString(resource, StandardCharsets.UTF_8);
-            ScriptUtils.executeSqlScript(connection, initScriptPath, sql);
+            ScriptUtils.executeSqlScript(connection, sqlScriptPath, sql);
         } catch (IOException e) {
-        	LOGGER.warn(String.format("Could not load classpath init script: {}", initScriptPath));
-            throw new SQLException("Could not load classpath init script: " + initScriptPath, e);
+        	LOGGER.warn(String.format("Could not load classpath init script: {}", sqlScriptPath));
+            throw new SQLException("Could not load classpath init script: " + sqlScriptPath, e);
         } catch (ScriptException e) {
-        	LOGGER.error(String.format("Error while executing init script: {}", initScriptPath, e));
-            throw new SQLException("Error while executing init script: " + initScriptPath, e);
+        	LOGGER.error(String.format("Error while executing init script: {}", sqlScriptPath, e));
+            throw new SQLException("Error while executing init script: " + sqlScriptPath, e);
         }
 	}
 	

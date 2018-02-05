@@ -1,5 +1,7 @@
 package com.unittesters.mule.munit.tools.testcontainers.db;
 
+import java.sql.SQLException;
+
 /**
  * 
  * <p>This connector helps to manage the <a href="https://testcontainers.org">TestContainers</a> database instance used for testing</a>.</p>
@@ -60,18 +62,6 @@ public class DBTestContainer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public void startContainer(){
-		containerHolder.startContainer(getUrl(), getUsername(), getPassword());
-	}
-	
-	public void stopContainer(){
-		containerHolder.stopContainer();
-	}
-	
-	public void runInitScript(){
-		containerHolder.rerunInitScript(getTcInitScriptPath());
-	}
 
 	public String getTcInitScriptPath() {
 		return tcInitScriptPath;
@@ -81,6 +71,20 @@ public class DBTestContainer {
 		this.tcInitScriptPath = tcInitScriptPath;
 	}
 	
+	public void startContainer(){
+		containerHolder.startContainer(getUrl(), getUsername(), getPassword());
+	}
 	
+	public void stopContainer(){
+		containerHolder.stopContainer();
+	}
+	
+	public void runInitScript() throws SQLException{
+		containerHolder.runSqlScript(getTcInitScriptPath());
+	}
+	
+	public void runSqlScript(String sqlScriptPath) throws SQLException {
+		containerHolder.runSqlScript(sqlScriptPath);
+	}
 	
 }

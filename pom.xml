@@ -21,7 +21,7 @@
 		<devkit.studio.package.skip>false</devkit.studio.package.skip>
 		<tc.jdbc.version>1.6.0</tc.jdbc.version>
 	</properties>
-	
+
 	<repositories>
 		<repository>
 			<id>mulesoft-releases</id>
@@ -79,7 +79,6 @@
 			<artifactId>jdbc</artifactId>
 			<version>${tc.jdbc.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>mysql</artifactId>
@@ -90,6 +89,12 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.6</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbutils</groupId>
+			<artifactId>commons-dbutils</artifactId>
+			<version>1.7</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

@@ -36,16 +36,17 @@ public class ConnectorConfig {
 	@Configurable
 	@Optional
 	@Placement(group="Advanced")
-	@FriendlyName("TC_INITSCRIPT")
-	private String tcInitScript;
+	@FriendlyName("Init Script Path")
+	private String dbInitScript;
 
 	public String getUrl() {
 		return url;
 	}
 
 	public void setUrl(String url) {
+		//Until TC 1.6.0, If init script contains procedures or similar objects, script splitting fails. Use Attribute invocation for TC_INITSCRIPT
 		if(url.contains("TC_INITSCRIPT")) {
-			throw new RuntimeException("TC_INITSCRIPT parameter is not allowed in JDBC Connection String. Please set it as attribute on configuration.");
+			throw new RuntimeException("TC_INITSCRIPT parameter is not allowed in JDBC Connection String. Please set it as Init Script Path on configuration.");
 		}
 		this.url = url;
 	}
@@ -66,12 +67,12 @@ public class ConnectorConfig {
 		this.password = password;
 	}
 
-	public String getTcInitScript() {
-		return tcInitScript;
+	public String getDbInitScript() {
+		return dbInitScript;
 	}
 
-	public void setTcInitScript(String tcInitScript) {
-		this.tcInitScript = tcInitScript;
+	public void setDbInitScript(String tcInitScript) {
+		this.dbInitScript = tcInitScript;
 	}
 	
 	

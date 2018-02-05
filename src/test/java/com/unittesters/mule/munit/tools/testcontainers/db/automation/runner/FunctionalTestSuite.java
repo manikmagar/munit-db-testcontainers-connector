@@ -5,13 +5,16 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+
+import com.unittesters.mule.munit.tools.testcontainers.db.automation.functional.RunInitScriptTestCases;
+import com.unittesters.mule.munit.tools.testcontainers.db.automation.functional.RunSqlScriptTestCases;
 import com.unittesters.mule.munit.tools.testcontainers.db.automation.functional.StartContainerTestCases;
 import com.unittesters.mule.munit.tools.testcontainers.db.automation.functional.StopContainerTestCases;
 import com.unittesters.mule.munit.tools.testcontainers.db.DBTestContainerConnector;
 import org.mule.tools.devkit.ctf.mockup.ConnectorTestContext;
 
 @RunWith(Suite.class)
-@SuiteClasses({ StartContainerTestCases.class, StopContainerTestCases.class })
+@SuiteClasses({ StartContainerTestCases.class, StopContainerTestCases.class, RunInitScriptTestCases.class, RunSqlScriptTestCases.class })
 
 public class FunctionalTestSuite {
 
