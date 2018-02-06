@@ -7,6 +7,7 @@ import org.mule.api.annotations.display.FriendlyName;
 import org.mule.api.annotations.display.Password;
 import org.mule.api.annotations.display.Placement;
 import org.mule.api.annotations.display.Summary;
+import org.mule.api.annotations.param.Optional;
 
 /**
  * Connector Configuration
@@ -31,12 +32,22 @@ public class ConnectorConfig {
 	@Password
 	@Placement(group="Connectivity")
 	private String password;
+	
+	@Configurable
+	@Optional
+	@Placement(group="Advanced")
+	@FriendlyName("Init Script Path")
+	private String dbInitScript;
 
 	public String getUrl() {
 		return url;
 	}
 
 	public void setUrl(String url) {
+		//Until TC 1.6.0, If init script contains procedures or similar objects, script splitting fails. Use Attribute invocation for TC_INITSCRIPT
+		if(url.contains("TC_INITSCRIPT")) {
+			throw new RuntimeException("TC_INITSCRIPT parameter is not allowed in JDBC Connection String. Please set it as Init Script Path on configuration.");
+		}
 		this.url = url;
 	}
 
@@ -56,4 +67,13 @@ public class ConnectorConfig {
 		this.password = password;
 	}
 
+	public String getDbInitScript() {
+		return dbInitScript;
+	}
+
+	public void setDbInitScript(String tcInitScript) {
+		this.dbInitScript = tcInitScript;
+	}
+	
+	
 }
