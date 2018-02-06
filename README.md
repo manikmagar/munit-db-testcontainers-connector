@@ -16,7 +16,38 @@ For beta connectors you can download the source code and build it with devkit to
 For released connectors you can download them from the update site in Anypoint Studio. 
 Open Anypoint Studio, go to Help → Install New Software and select Anypoint Connectors Update Site where you’ll find all avaliable connectors.
 
-#Usage
+
+
+### Maven Dependency
+
+```xml
+<dependency>
+  <groupId>com.unittesters</groupId>
+  <artifactId>munit-db-testcontainers-connector</artifactId>
+  <version>${tc.connector.version}</version>
+  <scope>test</scope>
+</dependency>
+```
+
+Get latest version from [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22munit-db-testcontainers-connector%22).
+
+### TestContainers Database Usage Dependency 
+
+To use the required database in your application, include the appropriate TestContainers JDBC dependency from the [latest version available on Maven Central](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.testcontainers%22). For example, to use MySQL Database, you would add -
+
+```XML
+<dependency>
+  <groupId>org.testcontainers</groupId>
+  <artifactId>mysql</artifactId>
+  <version>{connector-supported-version}</version>
+  <scope>test</scope>
+</dependency>	
+```
+
+
+
+###Demo Usage
+
 For information about usage our documentation at http://github.com/manikmagar/munit-db-testcontainers-connector.
 
 # Reporting Issues
