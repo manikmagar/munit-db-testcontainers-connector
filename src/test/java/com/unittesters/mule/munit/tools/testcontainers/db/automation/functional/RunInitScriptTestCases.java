@@ -46,7 +46,7 @@ public class RunInitScriptTestCases extends AbstractDBTestContainerConnectorTest
 		}
 	}
 
-	private void verifyTableIsCreated() throws SQLException {
+	private void verifyTableIsCreated() throws Exception {
 		try (Connection connection = getConnection()) {
 			QueryRunner runner = new QueryRunner();
 
@@ -66,7 +66,7 @@ public class RunInitScriptTestCases extends AbstractDBTestContainerConnectorTest
 		}
 	}
 
-	private void verifyProcedureIsCreated() throws SQLException {
+	private void verifyProcedureIsCreated() throws Exception {
 		try (Connection connection = getConnection()) {
 			CallableStatement proc = connection.prepareCall("{call calculate_library_value()}");
 			boolean result = proc.execute();
