@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.unittesters</groupId>
 	<artifactId>munit-db-testcontainers-connector</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.4</version>
 	<packaging>mule-module</packaging>
 	<name>Mule Munit DB TestContainers Anypoint Connector</name>
 
@@ -34,7 +33,7 @@
 		<connection>scm:git:git://github.com:manikmagar/munit-db-testcontainers-connector.git</connection>
 		<developerConnection>scm:git:git@github.com:manikmagar/munit-db-testcontainers-connector.git</developerConnection>
 		<url>http://github.com/manikmagar/munit-db-testcontainers-connector</url>
-		<tag>HEAD</tag>
+		<tag>0.0.4</tag>
 	</scm>
 
 	<build>
