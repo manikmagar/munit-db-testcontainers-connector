@@ -47,7 +47,7 @@
 					<autoVersionSubmodules>true</autoVersionSubmodules>
 					<useReleaseProfile>true</useReleaseProfile>
 					<releaseProfiles>release</releaseProfiles>
-					<tagNameFormat>v@{project.version}</tagNameFormat>
+					<tagNameFormat>@{project.version}</tagNameFormat>
 					<goals>deploy</goals>
 				</configuration>
 				<dependencies>
@@ -102,6 +102,9 @@
 	<profiles>
 		<profile>
 			<id>release</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<distributionManagement>
 				<snapshotRepository>
 					<id>ossrh</id>
