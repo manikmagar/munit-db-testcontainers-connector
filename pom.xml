@@ -18,7 +18,7 @@
 		<category>Community</category>
 		<licensePath>LICENSE.md</licensePath>
 		<devkit.studio.package.skip>false</devkit.studio.package.skip>
-		<tc.jdbc.version>1.7.3</tc.jdbc.version>
+		<tc.jdbc.version>1.10.0</tc.jdbc.version>
 	</properties>
 
 	<repositories>
