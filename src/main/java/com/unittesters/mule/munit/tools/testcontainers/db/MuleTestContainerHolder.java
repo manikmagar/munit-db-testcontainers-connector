@@ -13,8 +13,8 @@ import javax.script.ScriptException;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.unittesters.mule.munit.tools.testcontainers.db.utils.ScriptUtils;
+import org.testcontainers.ext.ScriptUtils;
+import org.testcontainers.jdbc.ContainerLessJdbcDelegate;
 
 /**
  * This utility start/stops the container and holds the connection until stopped. 
@@ -24,7 +24,7 @@ import com.unittesters.mule.munit.tools.testcontainers.db.utils.ScriptUtils;
  */
 public class MuleTestContainerHolder {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(ScriptUtils.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(MuleTestContainerHolder.class);
 
 	Connection connection;
 	
@@ -80,8 +80,7 @@ public class MuleTestContainerHolder {
 			try {
 				connection.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOGGER.error("Error while stopping the container: " + e.getMessage(), e);
 			} finally {
 				connection = null;	
 			}
@@ -102,17 +101,18 @@ public class MuleTestContainerHolder {
             URL resource = Thread.currentThread().getContextClassLoader().getResource(sqlScriptPath);
 
             if (resource == null) {
-            	LOGGER.warn(String.format("Could not load classpath init script: {}", sqlScriptPath));
+            	LOGGER.warn(String.format("Could not load classpath init script: %s", sqlScriptPath));
                 throw new SQLException("Could not load classpath init script: " + sqlScriptPath + ". Resource not found.");
             }
 
             String sql = IOUtils.toString(resource, StandardCharsets.UTF_8);
-            ScriptUtils.executeSqlScript(connection, sqlScriptPath, sql);
+            ContainerLessJdbcDelegate delegate = new ContainerLessJdbcDelegate(connection);
+            ScriptUtils.executeDatabaseScript(delegate, sqlScriptPath, sql);
         } catch (IOException e) {
-        	LOGGER.warn(String.format("Could not load classpath init script: {}", sqlScriptPath));
+        	LOGGER.warn(String.format("Could not load classpath init script: %s", sqlScriptPath));
             throw new SQLException("Could not load classpath init script: " + sqlScriptPath, e);
         } catch (ScriptException e) {
-        	LOGGER.error(String.format("Error while executing init script: {}", sqlScriptPath, e));
+        	LOGGER.error(String.format("Error while executing init script: %s", sqlScriptPath), e);
             throw new SQLException("Error while executing init script: " + sqlScriptPath, e);
         }
 	}
