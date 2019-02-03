@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.unittesters</groupId>
 	<artifactId>munit-db-testcontainers-connector</artifactId>
-	<version>0.0.6-SNAPSHOT</version>
+	<version>0.0.8</version>
 	<packaging>mule-module</packaging>
 	<name>Mule Munit DB TestContainers Anypoint Connector</name>
 
@@ -18,7 +18,7 @@
 		<category>Community</category>
 		<licensePath>LICENSE.md</licensePath>
 		<devkit.studio.package.skip>false</devkit.studio.package.skip>
-		<tc.jdbc.version>1.10.4</tc.jdbc.version>
+		<tc.jdbc.version>1.10.6</tc.jdbc.version>
 	</properties>
 
 	<repositories>
