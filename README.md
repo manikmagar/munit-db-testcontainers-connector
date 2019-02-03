@@ -48,7 +48,7 @@ To use the required database in your application, include the appropriate TestCo
 
 ### Demo Usage
 
-For information about usage our documentation at http://github.com/manikmagar/munit-db-testcontainers-connector.
+For information about usage our documentation at https://github.com/manikmagar/munit-db-testcontainers-demo.
 
 # Reporting Issues
 
